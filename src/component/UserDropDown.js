@@ -2,9 +2,11 @@ import { Autocomplete, Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 const UserDropDown = () => {
-  const [username, setUsername] = useState([]);
-  const [selectedUser, setSelectedUser] = useState([]);
-  const [isButtonDisabled, setButtonDisabled] = useState(true);
+  const [state, setState] = useState({
+    username: [],
+    selectedUser: [],
+    isButtonDisabled: true,
+  });
   const url = "https://jsonplaceholder.typicode.com/users";
 
   useEffect(() => {
@@ -12,18 +14,23 @@ const UserDropDown = () => {
       .then((response) => response.json())
       .then((result) => {
         let names = result.map((user) => user.name);
-        setUsername(names);
+        setState((prev) => {
+          return { ...prev, username: names };
+        });
       })
       .catch((err) => console.warn(err));
   }, [url]);
 
   const handleChange = (event, newValue) => {
-    setSelectedUser(newValue);
-    setButtonDisabled(newValue.length === 0 ? true : false);
+    let showButton = newValue.length === 0 ? true : false;
+    setState((prev) => {
+      return { ...prev, selectedUser: newValue, isButtonDisabled: showButton };
+    });
   };
 
   const storeUsers = () => {
-    console.log(selectedUser);
+    //TODO - can further call backend API with the logged payload
+    console.log(state);
   };
 
   return (
@@ -31,8 +38,8 @@ const UserDropDown = () => {
       <Autocomplete
         multiple
         id="username"
-        options={username}
-        value={selectedUser}
+        options={state.username}
+        value={state.selectedUser}
         sx={{ width: 900 }}
         onChange={handleChange}
         renderInput={(params) => <TextField {...params} label="Select users" />}
@@ -42,7 +49,7 @@ const UserDropDown = () => {
         color="success"
         variant="contained"
         onClick={storeUsers}
-        disabled={isButtonDisabled}
+        disabled={state.isButtonDisabled}
       >
         Send
       </Button>
