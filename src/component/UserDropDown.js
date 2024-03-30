@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import "../css/UserDropDown.css";
 
 const UserDropDown = () => {
+  const url = "https://jsonplaceholder.typicode.com/users";
   const [state, setState] = useState({
     username: [],
     selectedUser: [],
     isButtonDisabled: true,
   });
-  const url = "https://jsonplaceholder.typicode.com/users";
 
   useEffect(() => {
     fetch(url)
