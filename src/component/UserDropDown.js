@@ -1,5 +1,6 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import "../css/UserDropDown.css";
 
 const UserDropDown = () => {
   const [state, setState] = useState({
@@ -34,7 +35,7 @@ const UserDropDown = () => {
   };
 
   return (
-    <div>
+    <div className="dropdown">
       <Autocomplete
         multiple
         id="username"
@@ -46,6 +47,7 @@ const UserDropDown = () => {
       />
       <Button
         type="button"
+        style={{ marginTop: 10 }}
         color="success"
         variant="contained"
         onClick={storeUsers}
