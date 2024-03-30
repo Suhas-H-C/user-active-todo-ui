@@ -43,6 +43,7 @@ const UserDropDown = () => {
         value={state.selectedUser}
         sx={{ width: 900 }}
         onChange={handleChange}
+        data-testid="my-user-dropdown"
         renderInput={(params) => <TextField {...params} label="Select users" />}
       />
       <Button
@@ -50,6 +51,7 @@ const UserDropDown = () => {
         style={{ marginTop: 10 }}
         color="success"
         variant="contained"
+        data-testid="send-button"
         onClick={storeUsers}
         disabled={state.isButtonDisabled}
       >
