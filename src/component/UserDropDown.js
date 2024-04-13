@@ -1,6 +1,7 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "../css/UserDropDown.css";
+import getUsers from "../service/DropDownService";
 
 const UserDropDown = () => {
   const url = "https://jsonplaceholder.typicode.com/users";
@@ -10,17 +11,7 @@ const UserDropDown = () => {
     isButtonDisabled: true,
   });
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((result) => {
-        let names = result.map((user) => user.name);
-        setState((prev) => {
-          return { ...prev, username: names };
-        });
-      })
-      .catch((err) => console.warn(err));
-  }, [url]);
+  getUsers(url, setState);
 
   const handleChange = (event, newValue) => {
     let showButton = newValue.length === 0 ? true : false;
@@ -38,10 +29,11 @@ const UserDropDown = () => {
     <div className="dropdown">
       <Autocomplete
         multiple
+        limitTags={1}
         id="username"
         options={state.username}
         value={state.selectedUser}
-        sx={{ width: 900 }}
+        sx={{ width: 500 }}
         onChange={handleChange}
         data-testid="my-user-dropdown"
         renderInput={(params) => <TextField {...params} label="Select users" />}
@@ -49,7 +41,7 @@ const UserDropDown = () => {
       <Button
         type="button"
         style={{ marginTop: 10 }}
-        color="success"
+        color="info"
         variant="contained"
         data-testid="send-button"
         onClick={storeUsers}
