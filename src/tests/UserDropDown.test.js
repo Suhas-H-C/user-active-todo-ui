@@ -5,10 +5,8 @@ import UserDropDownContextProvider from "../context/UserDropDownContextProvider"
 import getUsers from "../service/DropDownService";
 import { users } from "./utils/TestUtils";
 
-jest.mock("../service/DropDownService");
-
 describe("Tests for User Dropdown component", () => {
-  getUsers.mockResolvedValue({
+  getUsers = jest.fn().mockResolvedValue({
     data: users,
   });
 

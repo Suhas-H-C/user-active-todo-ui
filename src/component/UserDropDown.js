@@ -8,7 +8,9 @@ const UserDropDown = () => {
 
   useEffect(() => {
     (async () => {
-      await fetchUserDetails();
+      let response = await fetchUserDetails();
+      let names = response.map((user) => user.name);
+      setState((prev) => ({ ...prev, username: names }));
     })();
   }, []);
 
