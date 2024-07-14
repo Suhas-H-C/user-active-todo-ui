@@ -2,6 +2,7 @@ import { Autocomplete, Button, TextField } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import "../css/UserDropDown.css";
 import { UserDropDownContext } from "../context/UserDropDownContextProvider";
+import { EMPTY_ARRAY } from "../constant/Constant";
 
 const UserDropDown = () => {
   const { state, setState, fetchUserDetails } = useContext(UserDropDownContext);
@@ -10,7 +11,7 @@ const UserDropDown = () => {
     (async () => {
       await fetchUserDetails();
     })();
-  }, []);
+  }, EMPTY_ARRAY);
 
   const handleChange = (event, newValue) => {
     let showButton = newValue.length === 0 ? true : false;
