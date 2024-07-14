@@ -21,26 +21,22 @@ describe("Tests for User Dropdown component", () => {
     });
   });
 
-  // it("user should be able to see options when clicked", async () => {
-  //   await act(async () => {
-  //     render(
-  //       <UserDropDownContext.Provider value={MOCK_VALUE_USER_DROP_DOWN}>
-  //         <UserDropDown />
-  //       </UserDropDownContext.Provider>
-  //     );
-  //   });
+  it("user should be able to see options when clicked", async () => {
+    await act(async () => {
+      render(
+        <UserDropDownContext.Provider value={MOCK_VALUE_USER_DROP_DOWN}>
+          <UserDropDown />
+        </UserDropDownContext.Provider>
+      );
+    });
 
-  //   screen.logTestingPlaygroundURL();
-  //   await waitFor(() => {
-  //     userEvent.click(screen.getByRole("combobox", { name: /select users/i }));
-  //   });
+    await waitFor(() => {
+      userEvent.click(screen.getByTestId("user-dropdown-type-testid"));
+    });
 
-  //   screen.logTestingPlaygroundURL();
-  //   await waitFor(() => {
-  //     const option = screen.getByText(
-  //       MOCK_VALUE_USER_DROP_DOWN.state.username[0].name
-  //     );
-  //     expect(option).toBeInTheDocument();
-  //   });
-  // });
+    await waitFor(() => {
+      const button = screen.getByTestId("send-button-type-testid");
+      expect(button).toBeDisabled();
+    });
+  });
 });
