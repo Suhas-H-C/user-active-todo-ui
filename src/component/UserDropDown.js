@@ -1,17 +1,16 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "../css/UserDropDown.css";
-import getUsers from "../service/DropDownService";
+import { UserDropDownContext } from "../context/UserDropDownContextProvider";
 
 const UserDropDown = () => {
-  const url = "https://jsonplaceholder.typicode.com/users";
-  const [state, setState] = useState({
-    username: [],
-    selectedUser: [],
-    isButtonDisabled: true,
-  });
+  const { state, setState, fetchUserDetails } = useContext(UserDropDownContext);
 
-  getUsers(url, setState);
+  useEffect(() => {
+    (async () => {
+      await fetchUserDetails();
+    })();
+  }, []);
 
   const handleChange = (event, newValue) => {
     let showButton = newValue.length === 0 ? true : false;

@@ -1,13 +1,9 @@
-const getUsers = (url, setState) => {
-  fetch(url)
-    .then((response) => response.json())
-    .then((result) => {
-      let names = result.map((user) => user.name);
-      setState((prev) => {
-        return { ...prev, username: names };
-      });
-    })
-    .catch((err) => console.warn(err));
+const getUsers = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.error("Network call failed");
+  }
+  return response;
 };
 
 export default getUsers;

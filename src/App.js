@@ -1,13 +1,12 @@
 import "./App.css";
-import Generic from "./component/Generic";
 import UserDropDown from "./component/UserDropDown";
+import UserDropDownContextProvider from "./context/UserDropDownContextProvider";
 
 function App() {
   return (
-    <>
-      {/* <UserDropDown /> */}
-      <Generic />
-    </>
+    <UserDropDownContextProvider>
+      <UserDropDown />
+    </UserDropDownContextProvider>
   );
 }
 
