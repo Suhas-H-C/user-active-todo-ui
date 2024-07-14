@@ -1,17 +1,18 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "../css/UserDropDown.css";
-import getUsers from "../service/DropDownService";
+import { UserDropDownContext } from "../context/UserDropDownContextProvider";
 
 const UserDropDown = () => {
-  const url = "https://jsonplaceholder.typicode.com/users";
-  const [state, setState] = useState({
-    username: [],
-    selectedUser: [],
-    isButtonDisabled: true,
-  });
+  const { state, setState, fetchUserDetails } = useContext(UserDropDownContext);
 
-  getUsers(url, setState);
+  useEffect(() => {
+    (async () => {
+      let response = await fetchUserDetails();
+      let names = response.map((user) => user.name);
+      setState((prev) => ({ ...prev, username: names }));
+    })();
+  }, []);
 
   const handleChange = (event, newValue) => {
     let showButton = newValue.length === 0 ? true : false;
@@ -35,7 +36,7 @@ const UserDropDown = () => {
         value={state.selectedUser}
         sx={{ width: 500 }}
         onChange={handleChange}
-        data-testid="my-user-dropdown"
+        data-testid="user-dropdown-type-testid"
         renderInput={(params) => <TextField {...params} label="Select users" />}
       />
       <Button
@@ -43,7 +44,7 @@ const UserDropDown = () => {
         style={{ marginTop: 10 }}
         color="info"
         variant="contained"
-        data-testid="send-button"
+        data-testid="send-button-type-testid"
         onClick={storeUsers}
         disabled={state.isButtonDisabled}
       >
