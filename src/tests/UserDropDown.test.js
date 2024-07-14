@@ -1,9 +1,12 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import UserDropDown from "../component/UserDropDown";
-import UserDropDownContextProvider from "../context/UserDropDownContextProvider";
+import UserDropDownContextProvider, {
+  UserDropDownContext,
+} from "../context/UserDropDownContextProvider";
 import getUsers from "../service/DropDownService";
-import { users } from "./utils/TestUtils";
+import { users } from "./utils/data/TestUtils";
+import { MOCK_VALUE_USER_DROP_DOWN } from "./utils/mocks/Mocks";
 
 jest.mock("../service/DropDownService");
 
@@ -15,9 +18,9 @@ describe("Tests for User Dropdown component", () => {
   it("should render user drop down component", async () => {
     await act(async () => {
       render(
-        <UserDropDownContextProvider>
+        <UserDropDownContext.Provider value={MOCK_VALUE_USER_DROP_DOWN}>
           <UserDropDown />
-        </UserDropDownContextProvider>
+        </UserDropDownContext.Provider>
       );
     });
 

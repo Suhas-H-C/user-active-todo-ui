@@ -1,6 +1,6 @@
 import { URL } from "../../constant/Constant";
 import getUsers from "../../service/DropDownService";
-import { users } from "../utils/TestUtils";
+import { users } from "../utils/data/TestUtils";
 
 describe("Tests for Dropdown service", () => {
   beforeEach(() => {
