@@ -13,7 +13,7 @@ describe("Tests for User Dropdown component", () => {
   });
 
   it("should render user drop down component", async () => {
-    await act(() => {
+    await act(async () => {
       render(
         <UserDropDownContextProvider>
           <UserDropDown />
