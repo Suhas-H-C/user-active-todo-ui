@@ -17,5 +17,7 @@ describe("Tests for Dropdown service", () => {
     let data = await response.json();
     expect(fetch).toHaveBeenCalledWith(URL);
     expect(data.users).toHaveLength(1);
+    expect(data.users).toEqual(users);
+    expect(data.users[0].name).toEqual(users[0].name);
   });
 });
