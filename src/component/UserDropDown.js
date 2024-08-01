@@ -23,7 +23,6 @@ const UserDropDown = () => {
   };
 
   const storeUsers = () => {
-    console.log(state);
     setClientDashboard({
       childPage: true,
       parentPage: false,

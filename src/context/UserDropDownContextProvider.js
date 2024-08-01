@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
-import { URL } from "../constant/Constant";
-import getUsers from "../service/DropDownService";
+import { TODOS_ENDPOINT, USERS_ENDPOINT } from "../constant/Constant";
+import getUsers, { getGridData } from "../service/DropDownService";
 import { userInitialState, viewForAdmin } from "./InitialState";
 
 export const UserDropDownContext = createContext();
@@ -10,7 +10,11 @@ const UserDropDownContextProvider = ({ children }) => {
   const [clientDashboard, setClientDashboard] = useState(viewForAdmin);
 
   const fetchUserDetails = async () => {
-    return await getUsers(URL);
+    return await getUsers(USERS_ENDPOINT);
+  };
+
+  const fetchGridData = async () => {
+    return await getGridData(TODOS_ENDPOINT);
   };
 
   return (
@@ -19,6 +23,7 @@ const UserDropDownContextProvider = ({ children }) => {
         state,
         setState,
         fetchUserDetails,
+        fetchGridData,
         clientDashboard,
         setClientDashboard,
       }}

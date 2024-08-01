@@ -10,4 +10,14 @@ const getUsers = async (url) => {
   return response.data;
 };
 
+export const getGridData = async (url) => {
+  const header = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+  const body = {};
+  let response = await fetchResponse(url, "GET", header, body);
+  return response.data;
+};
+
 export default getUsers;
