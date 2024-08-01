@@ -4,7 +4,8 @@ import "../css/UserDropDown.css";
 import { UserDropDownContext } from "../context/UserDropDownContextProvider";
 
 const UserDropDown = () => {
-  const { state, setState, fetchUserDetails } = useContext(UserDropDownContext);
+  const { state, setState, fetchUserDetails, setClientDashboard } =
+    useContext(UserDropDownContext);
 
   useEffect(() => {
     (async () => {
@@ -22,8 +23,11 @@ const UserDropDown = () => {
   };
 
   const storeUsers = () => {
-    //TODO - can further call backend API with the logged payload
     console.log(state);
+    setClientDashboard({
+      childPage: true,
+      parentPage: false,
+    });
   };
 
   return (
