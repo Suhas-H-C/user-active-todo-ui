@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import "./App.css";
+import ClientDashboard from "./component/ClientDashboard";
 import UserDropDown from "./component/UserDropDown";
-import UserDropDownContextProvider from "./context/UserDropDownContextProvider";
+import { UserDropDownContext } from "./context/UserDropDownContextProvider";
 
 function App() {
-  return (
-    <UserDropDownContextProvider>
-      <UserDropDown />
-    </UserDropDownContextProvider>
+  const { state, clientDashboard } = useContext(UserDropDownContext);
+
+  return clientDashboard.parentPage ? (
+    <UserDropDown />
+  ) : (
+    <ClientDashboard name={state.selectedUser[0]} />
   );
 }
 

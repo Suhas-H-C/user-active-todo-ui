@@ -3,3 +3,8 @@ export const userInitialState = {
   selectedUser: [],
   isButtonDisabled: true,
 };
+
+export const viewForAdmin = {
+  childPage: false,
+  parentPage: true,
+};
