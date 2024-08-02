@@ -28,3 +28,14 @@ export const CLIENT_DASHBOARD_CONTEXT = {
   fetchGridData: jest.fn(),
   names: ["John", "Marco", "Elvis"],
 };
+
+export const USER_DROPDOWN_CONTEXT = {
+  state: {
+    username: CLIENT_DASHBOARD_CONTEXT.names,
+    selectedUser: [],
+    isButtonDisabled: true,
+  },
+  setState: jest.fn(),
+  fetchUserDetails: jest.fn(),
+  setClientDashboard: jest.fn(),
+};
