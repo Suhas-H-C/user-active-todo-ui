@@ -12,10 +12,12 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
+    "^axios$": "<rootDir>/node_modules/axios/dist/axios.js",
     "\\.(styl|less|sass|png|jpg|ttf|woff|woff2|css|scss|svg)$":
       "identity-obj-proxy",
   },
-  transformIgnorePatterns: [`/node_modules/(?!${esModules}).+(js|jsx)$`],
+  coverageDirectory: "coverage",
+  transformIgnorePatterns: [`/node_modules/(?!${esModules}).+(js|jsx|ts|tsx)$`],
   watchPathIgnorePatterns: ["<rootDir>/node_modules/"],
   setupFiles: ["<rootDir>/src/setupTests.js"],
 };
