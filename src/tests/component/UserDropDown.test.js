@@ -21,4 +21,22 @@ describe("Tests for User Dropdown component", () => {
       expect(getDropDown).toBeInTheDocument();
     });
   });
+
+  it("should render user drop down component with disabled proceed button", async () => {
+    await act(async () => {
+      render(
+        <UserDropDownContextProvider>
+          <UserDropDown />
+        </UserDropDownContextProvider>
+      );
+    });
+
+    screen.logTestingPlaygroundURL();
+    await waitFor(() => {
+      const button = screen.getByRole("button", {
+        name: /send/i,
+      });
+      expect(button).toBeDisabled();
+    });
+  });
 });
