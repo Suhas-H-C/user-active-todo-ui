@@ -7,8 +7,8 @@ export async function fetchResponse(url, method, headers, body) {
     .catch((error) => console.error(error));
 }
 
-export function handleResponse(response) {
-  if (response.status == 200 || response.status == 201) {
+export async function handleResponse(response) {
+  if (response.status === 200 || response.status === 201) {
     return response;
   }
 }

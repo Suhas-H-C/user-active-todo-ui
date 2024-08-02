@@ -10,7 +10,7 @@ function App() {
   return clientDashboard.parentPage ? (
     <UserDropDown />
   ) : (
-    <ClientDashboard name={state.selectedUser[0]} />
+    <ClientDashboard name={state.selectedUser} />
   );
 }
 
