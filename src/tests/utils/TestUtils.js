@@ -23,3 +23,8 @@ export const users = [
     },
   },
 ];
+
+export const CLIENT_DASHBOARD_CONTEXT = {
+  fetchGridData: jest.fn(),
+  names: ["John", "Marco", "Elvis"],
+};
