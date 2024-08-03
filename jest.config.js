@@ -12,7 +12,6 @@ module.exports = {
   moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
   moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
-    "^axios$": "<rootDir>/node_modules/axios/dist/axios.js",
     "\\.(styl|less|sass|png|jpg|ttf|woff|woff2|css|scss|svg)$":
       "identity-obj-proxy",
   },

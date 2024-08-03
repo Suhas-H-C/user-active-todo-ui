@@ -39,3 +39,12 @@ export const USER_DROPDOWN_CONTEXT = {
   fetchUserDetails: jest.fn(),
   setClientDashboard: jest.fn(),
 };
+
+export const todos = [
+  {
+    userId: 1,
+    id: 1,
+    title: "delectus aut autem",
+    completed: false,
+  },
+];
