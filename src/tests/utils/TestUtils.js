@@ -48,3 +48,7 @@ export const todos = [
     completed: false,
   },
 ];
+
+export const BACK_NAVIGATION_CONTEXT = {
+  setClientDashboard: jest.fn(),
+};
