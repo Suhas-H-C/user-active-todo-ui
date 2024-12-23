@@ -23,11 +23,13 @@ describe("Tests for Client Dashboard component", () => {
     const completed = screen.getByText("Completed");
 
     expect(message).toBeInTheDocument();
-    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalled();
     expect(userId).toBeInTheDocument();
     expect(Id).toBeInTheDocument();
     expect(title).toBeInTheDocument();
     expect(completed).toBeInTheDocument();
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalled();
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledTimes(1);
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledWith();
   });
 
   it("user should see a row on the data grid when component is rendered", async () => {
@@ -56,5 +58,11 @@ describe("Tests for Client Dashboard component", () => {
       });
       expect(completed).toBeInTheDocument();
     });
+
+    await waitFor(() => {
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalled();
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledTimes(1);
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledWith();
+    })
   });
 });
