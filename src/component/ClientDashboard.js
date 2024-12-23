@@ -49,6 +49,7 @@ const ClientDashboard = ({ name }) => {
             },
           }}
           pageSizeOptions={[5]}
+          data-testid="data-grid-testid"
           disableRowSelectionOnClick
         />
       </Box>

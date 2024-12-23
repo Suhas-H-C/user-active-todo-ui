@@ -1,3 +1,6 @@
+import { EMPTY_OBJECT } from "../../constant/Constant";
+import { userInitialState, viewForAdmin } from "../../context/InitialState";
+
 export const users = [
   {
     id: 1,
@@ -24,8 +27,19 @@ export const users = [
   },
 ];
 
+export const todos = [
+  {
+    userId: 1,
+    id: 1,
+    title: "delectus aut autem",
+    completed: false,
+  },
+];
+
 export const CLIENT_DASHBOARD_CONTEXT = {
-  fetchGridData: jest.fn(),
+  fetchGridData: jest.fn().mockReturnValue({
+    data: todos
+  }),
   names: ["John", "Marco", "Elvis"],
 };
 
@@ -40,11 +54,19 @@ export const USER_DROPDOWN_CONTEXT = {
   setClientDashboard: jest.fn(),
 };
 
-export const todos = [
-  {
-    userId: 1,
-    id: 1,
-    title: "delectus aut autem",
-    completed: false,
-  },
-];
+export const BACK_NAVIGATION_CONTEXT = {
+  setClientDashboard: jest.fn().mockReturnValue(EMPTY_OBJECT),
+};
+
+export const APP_CONTEXT = {
+  state: userInitialState,
+  setState: jest.fn(),
+  fetchUserDetails: jest.fn().mockReturnValue({
+    data: users
+  }),
+  fetchGridData: jest.fn().mockReturnValue({
+    data: todos
+  }),
+  clientDashboard: viewForAdmin,
+  setClientDashboard: jest.fn(),
+};
