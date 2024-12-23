@@ -6,6 +6,7 @@ import UserDropDown from "../../component/UserDropDown";
 import UserDropDownContextProvider from "../../context/UserDropDownContextProvider";
 import * as ApiConfig from "../../service/ApiFetchConfig";
 import { users } from "../utils/TestUtils";
+import { EMPTY_OBJECT, GET, HEADERS, USERS_ENDPOINT } from "../../constant/Constant";
 
 describe("Tests for User Dropdown component", () => {
   ApiConfig.fetchResponse = jest.fn().mockResolvedValue({
@@ -13,92 +14,84 @@ describe("Tests for User Dropdown component", () => {
   });
 
   it("should render user drop down component", async () => {
-    await act(async () => {
+    await act(async () =>
       render(
         <UserDropDownContextProvider>
           <UserDropDown />
         </UserDropDownContextProvider>
-      );
-    });
-
+      )
+    );
+    await waitFor(() => expect(screen.getByRole("combobox", { name: /select users/i })).toBeInTheDocument());
     await waitFor(() => {
-      const getDropDown = screen.getByRole("combobox", {
-        name: /select users/i,
-      });
-      expect(getDropDown).toBeInTheDocument();
+      expect(ApiConfig.fetchResponse).toHaveBeenCalled();
+      expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
     });
   });
 
   it("should render user drop down component with disabled send button", async () => {
-    await act(async () => {
+    await act(async () =>
       render(
         <UserDropDownContextProvider>
           <UserDropDown />
         </UserDropDownContextProvider>
-      );
-    });
-
+      )
+    );
+    await waitFor(() => expect(screen.getByRole("button", { name: /send/i })).toBeDisabled());
     await waitFor(() => {
-      const button = screen.getByRole("button", {
-        name: /send/i,
-      });
-      expect(button).toBeDisabled();
+      expect(ApiConfig.fetchResponse).toHaveBeenCalled();
+      expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
     });
   });
 
   it("user should see options from dropdown when component is rendered with mocked data", async () => {
-    await act(async () => {
+    await act(async () =>
       render(
         <UserDropDownContextProvider>
           <UserDropDown />
         </UserDropDownContextProvider>
-      );
-    });
-
-    await waitFor(() =>
-      userEvent.click(
-        screen.getByRole("combobox", {
-          name: /select users/i,
-        })
       )
     );
-
+    await waitFor(() => userEvent.click(screen.getByRole("combobox", { name: /select users/i })));
+    await waitFor(() => expect(screen.getByRole("option")).toBeInTheDocument());
     await waitFor(() => {
-      const option = screen.getByRole("option");
-      expect(option).toBeInTheDocument();
+      expect(ApiConfig.fetchResponse).toHaveBeenCalled();
+      expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
     });
   });
 
   it("user should select an option which maked send button enabled", async () => {
-    await act(async () => {
+    await act(async () =>
       render(
         <UserDropDownContextProvider>
           <UserDropDown />
         </UserDropDownContextProvider>
-      );
-    });
-
-    await waitFor(() =>
-      userEvent.click(
-        screen.getByRole("combobox", {
-          name: /select users/i,
-        })
       )
     );
-
-    await waitFor(() =>
-      userEvent.click(
-        screen.getByRole("option", {
-          name: /leanne graham/i,
-        })
-      )
-    );
-
+    await waitFor(() => userEvent.click(screen.getByRole("combobox", { name: /select users/i })));
+    await waitFor(() => userEvent.click(screen.getByRole("option", { name: /leanne graham/i })));
+    await waitFor(() => expect(screen.getByRole("button", { name: /send/i })).not.toBeDisabled());
     await waitFor(() => {
-      const button = screen.getByRole("button", {
-        name: /send/i,
-      });
-      expect(button).not.toBeDisabled();
+      expect(ApiConfig.fetchResponse).toHaveBeenCalled();
+      expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+    });
+  });
+
+  it("user should see disabled button when options are deselected", async () => {
+    await act(async () =>
+      render(
+        <UserDropDownContextProvider>
+          <UserDropDown />
+        </UserDropDownContextProvider>
+      )
+    );
+    await waitFor(() => userEvent.click(screen.getByRole("combobox", { name: /select users/i })));
+    await waitFor(() => userEvent.click(screen.getByRole("option", { name: /leanne graham/i })));
+    await waitFor(() => expect(screen.getByRole("button", { name: /send/i })).not.toBeDisabled());
+    await waitFor(() => userEvent.click(screen.getByTestId('CancelIcon')));
+    await waitFor(() => expect(screen.getByRole("button", { name: /send/i })).toBeDisabled());
+    await waitFor(() => {
+      expect(ApiConfig.fetchResponse).toHaveBeenCalled();
+      expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
     });
   });
 });

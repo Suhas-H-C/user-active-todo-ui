@@ -2,17 +2,18 @@ import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useState } from "react";
 import { UserDropDownContext } from "../context/UserDropDownContextProvider";
+import { EMPTY_ARRAY } from "../constant/Constant";
 
 const ClientDashboard = ({ name }) => {
   const { fetchGridData } = useContext(UserDropDownContext);
-  const [row, setRow] = useState([]);
+  const [row, setRow] = useState(EMPTY_ARRAY);
 
   useEffect(() => {
     (async () => {
       let gridData = await fetchGridData();
       setRow(gridData);
     })();
-  }, []);
+  }, EMPTY_ARRAY);
 
   const columns = [
     { field: "userId", headerName: "User ID", width: 90 },
