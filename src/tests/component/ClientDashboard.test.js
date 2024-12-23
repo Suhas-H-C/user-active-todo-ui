@@ -29,6 +29,9 @@ describe("Tests for Client Dashboard component", () => {
     expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalled();
     expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledTimes(1);
     expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledWith();
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturned();
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturnedTimes(1);
+    expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturnedWith({ data: todos });
   });
 
   it("user should see a row on the data grid when component is rendered", async () => {
@@ -48,6 +51,9 @@ describe("Tests for Client Dashboard component", () => {
       expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalled();
       expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledTimes(1);
       expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveBeenCalledWith();
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturned();
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturnedTimes(1);
+      expect(CLIENT_DASHBOARD_CONTEXT.fetchGridData).toHaveReturnedWith({ data: todos });
     });
   });
 });

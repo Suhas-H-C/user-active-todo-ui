@@ -9,7 +9,7 @@ import { users } from "../utils/TestUtils";
 import { EMPTY_OBJECT, GET, HEADERS, USERS_ENDPOINT } from "../../constant/Constant";
 
 describe("Tests for User Dropdown component", () => {
-  ApiConfig.fetchResponse = jest.fn().mockResolvedValue({
+  ApiConfig.fetchResponse = jest.fn().mockReturnValue({
     data: users,
   });
 
@@ -25,6 +25,9 @@ describe("Tests for User Dropdown component", () => {
     await waitFor(() => {
       expect(ApiConfig.fetchResponse).toHaveBeenCalled();
       expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+      expect(ApiConfig.fetchResponse).toHaveReturned();
+      expect(ApiConfig.fetchResponse).toHaveReturnedTimes(1);
+      expect(ApiConfig.fetchResponse).toHaveReturnedWith({ data: users });
     });
   });
 
@@ -40,6 +43,8 @@ describe("Tests for User Dropdown component", () => {
     await waitFor(() => {
       expect(ApiConfig.fetchResponse).toHaveBeenCalled();
       expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+      expect(ApiConfig.fetchResponse).toHaveReturned();
+      expect(ApiConfig.fetchResponse).toHaveReturnedWith({ data: users });
     });
   });
 
@@ -56,6 +61,8 @@ describe("Tests for User Dropdown component", () => {
     await waitFor(() => {
       expect(ApiConfig.fetchResponse).toHaveBeenCalled();
       expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+      expect(ApiConfig.fetchResponse).toHaveReturned();
+      expect(ApiConfig.fetchResponse).toHaveReturnedWith({ data: users });
     });
   });
 
@@ -73,6 +80,8 @@ describe("Tests for User Dropdown component", () => {
     await waitFor(() => {
       expect(ApiConfig.fetchResponse).toHaveBeenCalled();
       expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+      expect(ApiConfig.fetchResponse).toHaveReturned();
+      expect(ApiConfig.fetchResponse).toHaveReturnedWith({ data: users });
     });
   });
 
@@ -92,6 +101,8 @@ describe("Tests for User Dropdown component", () => {
     await waitFor(() => {
       expect(ApiConfig.fetchResponse).toHaveBeenCalled();
       expect(ApiConfig.fetchResponse).toHaveBeenNthCalledWith(1, USERS_ENDPOINT, GET, HEADERS, EMPTY_OBJECT);
+      expect(ApiConfig.fetchResponse).toHaveReturned();
+      expect(ApiConfig.fetchResponse).toHaveReturnedWith({ data: users });
     });
   });
 });

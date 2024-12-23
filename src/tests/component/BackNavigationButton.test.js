@@ -7,6 +7,7 @@ import {
     UserDropDownContext,
 } from "../../context/UserDropDownContextProvider";
 import { BACK_NAVIGATION_CONTEXT } from "../utils/TestUtils";
+import { EMPTY_OBJECT } from "../../constant/Constant";
 
 describe("Tests for Back Navigation component", () => {
     it("should render back navigation button", async () => {
@@ -50,6 +51,9 @@ describe("Tests for Back Navigation component", () => {
                 childPage: false,
                 parentPage: true,
             });
+            expect(BACK_NAVIGATION_CONTEXT.setClientDashboard).toHaveReturned();
+            expect(BACK_NAVIGATION_CONTEXT.setClientDashboard).toHaveReturnedTimes(1);
+            expect(BACK_NAVIGATION_CONTEXT.setClientDashboard).toHaveReturnedWith(EMPTY_OBJECT);
         });
     });
 });
