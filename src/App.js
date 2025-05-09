@@ -1,10 +1,19 @@
+import { useContext } from "react";
 import "./App.css";
+import BackNavigationButton from "./component/BackNavigationButton";
+import ClientDashboard from "./component/ClientDashboard";
 import UserDropDown from "./component/UserDropDown";
+import { UserDropDownContext } from "./context/UserDropDownContextProvider";
 
 function App() {
-  return (
+  const { state, clientDashboard } = useContext(UserDropDownContext);
+
+  return clientDashboard.parentPage ? (
+    <UserDropDown />
+  ) : (
     <>
-      <UserDropDown />
+      <BackNavigationButton />
+      <ClientDashboard name={state.selectedUser} />
     </>
   );
 }
